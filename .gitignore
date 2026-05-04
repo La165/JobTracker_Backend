@@ -1,0 +1,56 @@
+# ========================
+# Maven / Build
+# ========================
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ========================
+# Logs
+# ========================
+*.log
+
+# ========================
+# Environment files (VERY IMPORTANT)
+# ========================
+.env
+application-local.properties
+
+# ========================
+# IDEs
+# ========================
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### Eclipse / STS ###
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.apt_generated
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+# ========================
+# OS files
+# ========================
+.DS_Store
+Thumbs.db
