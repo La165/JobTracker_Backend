@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jobtracker.entity.User;
 import com.jobtracker.security.JwtUtil;
 import com.jobtracker.service.UserService;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/auth")
 

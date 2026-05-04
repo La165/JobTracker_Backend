@@ -22,7 +22,7 @@ import com.jobtracker.service.JobService;
 import jakarta.validation.Valid;
 
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/jobs")
 public class JobContoller {
