@@ -143,8 +143,9 @@ return dto;
 	    if (updatedJob.getAppliedDate() != null)
 	        job.setAppliedDate(updatedJob.getAppliedDate());
 
-	    if (updatedJob.getExamDate() != null)
-	        job.setExamDate(updatedJob.getExamDate());
+	    if (updatedJob.getExamDate() != null && !updatedJob.getExamDate().toString().isEmpty()) {
+    job.setExamDate(updatedJob.getExamDate());
+}
 
 	    if (updatedJob.getNotes() != null)
 	        job.setNotes(updatedJob.getNotes());
