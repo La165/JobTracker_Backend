@@ -40,10 +40,13 @@ public class JobService {
 	    Job job = new Job();
 	    job.setCompanyName(dto.getCompanyName());
 	    job.setRole(dto.getRole());
+		job.setJobLink(dto.getJobLink());
+job.setLocation(dto.getLocation());
 	    job.setStatus(dto.getStatus());
 	    job.setAppliedDate(dto.getAppliedDate());
-	    job.setExamDate(dto.getExamDate());
-	    job.setNotes(dto.getNotes());
+	    job.setResumeVersion(
+	    	    dto.getResumeVersion() != null ? dto.getResumeVersion() : "software developer"
+	    	);
 	    job.setUser(user);  
 
 	    Job saved = jobRepository.save(job);
@@ -53,11 +56,13 @@ public class JobService {
 	    response.setId(saved.getId());
 	    response.setCompanyName(saved.getCompanyName());
 	    response.setRole(saved.getRole());
-	    response.setStatus(saved.getStatus());
+		response.setJobLink(saved.getJobLink());
+		response.setLocation(saved.getLocation());
+		response.setStatus(saved.getStatus());
 	    response.setAppliedDate(saved.getAppliedDate());
 	    response.setExamDate(saved.getExamDate());
 	    response.setNotes(saved.getNotes());
-
+		response.setResumeVersion(saved.getNotes());
 	    return response;
 	}
 	
@@ -78,14 +83,20 @@ public class JobService {
 		            .stream()
 		            .map(job -> {
 		                JobResponseDTO dto = new JobResponseDTO();
-		                dto.setId(job.getId());
-		                dto.setCompanyName(job.getCompanyName());
-		                dto.setRole(job.getRole());
-		                dto.setStatus(job.getStatus());
-		                dto.setAppliedDate(job.getAppliedDate());
-		                dto.setExamDate(job.getExamDate());
-		                dto.setNotes(job.getNotes());
-		                return dto;
+dto.setId(job.getId());
+dto.setCompanyName(job.getCompanyName());
+dto.setRole(job.getRole());
+dto.setJobLink(job.getJobLink());
+dto.setLocation(job.getLocation());
+dto.setStatus(job.getStatus());
+dto.setAppliedDate(job.getAppliedDate());
+dto.setExamDate(job.getExamDate());
+dto.setNotes(job.getNotes());
+
+// ✅ IMPORTANT FIX
+dto.setResumeVersion(job.getResumeVersion());
+
+return dto;
 		            })
 		            .collect(java.util.stream.Collectors.toList());
 		}
@@ -110,15 +121,36 @@ public class JobService {
 	}
 	
 	public Job updateJob(Long id, Job updatedJob) {
+
 	    Job job = jobRepository.findById(id)
 	            .orElseThrow(() -> new RuntimeException("Job not found"));
 
-	    job.setCompanyName(updatedJob.getCompanyName());
-	    job.setRole(updatedJob.getRole());
-	    job.setStatus(updatedJob.getStatus());
-	    job.setAppliedDate(updatedJob.getAppliedDate());
-	    job.setExamDate(updatedJob.getExamDate());
-	    job.setNotes(updatedJob.getNotes());
+	    if (updatedJob.getCompanyName() != null)
+	        job.setCompanyName(updatedJob.getCompanyName());
+
+	    if (updatedJob.getRole() != null)
+	        job.setRole(updatedJob.getRole());
+
+	    if (updatedJob.getJobLink() != null)
+	        job.setJobLink(updatedJob.getJobLink());
+
+	    if (updatedJob.getLocation() != null)
+	        job.setLocation(updatedJob.getLocation());
+
+	    if (updatedJob.getStatus() != null)
+	        job.setStatus(updatedJob.getStatus());
+
+	    if (updatedJob.getAppliedDate() != null)
+	        job.setAppliedDate(updatedJob.getAppliedDate());
+
+	    if (updatedJob.getExamDate() != null)
+	        job.setExamDate(updatedJob.getExamDate());
+
+	    if (updatedJob.getNotes() != null)
+	        job.setNotes(updatedJob.getNotes());
+
+	    if (updatedJob.getResumeVersion() != null)
+	        job.setResumeVersion(updatedJob.getResumeVersion());
 
 	    return jobRepository.save(job);
 	}
